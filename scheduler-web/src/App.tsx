@@ -1,15 +1,15 @@
 import './styles/App.scss'
-import { auth } from '../firebase-config';
+import Login from './components/Login/Login';
+
 
 function App() {
-  console.log(auth.config);
   return (
     <>
       <div>
-        hello
+        <Login />
       </div>
     </>
   )
 }
 
-export default App
+export default App;
