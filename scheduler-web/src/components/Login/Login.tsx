@@ -10,10 +10,13 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [user, setUser] = useState<User>();
+    const [isValidEmail, setIsValidEmail] = useState(false);
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const onChangeEmail = (e:any) => {
         setEmail(e.target.value);
+        setIsValidEmail(emailRegex.test(e.target.value));
     }
 
     const onChangePassword = (e:any) => {
@@ -23,13 +26,15 @@ const Login = () => {
     const handleSubmit = async (e:any) => {
         e.preventDefault();
 
-        try {
-            const user = await signInWithEmailAndPassword(auth, email, password);
-            console.log(user);
-            setUser(user.user);
-        }
-        catch (err:any) {
-            setError(err.message);
+        if (isValidEmail) {
+            try {
+                const user = await signInWithEmailAndPassword(auth, email, password);
+                console.log(user);
+                setUser(user.user);
+            }
+            catch (err:any) {
+                setError(err.message);
+            }
         }
         
     }
@@ -41,9 +46,22 @@ const Login = () => {
         <div className={styles.content}>
             <h2>Sign In</h2>
             <form onSubmit={handleSubmit}>
-                <input type='text' value={email} placeholder='email...' onChange={onChangeEmail}></input>
-                <input type='text' value={password} placeholder='password...' onChange={onChangePassword}></input>
-                <input type='submit'></input>
+                <input 
+                    type='text' 
+                    value={email} 
+                    placeholder='email...' 
+                    onChange={onChangeEmail} 
+                    style={{ borderColor: isValidEmail ? "black" : "red" }}
+                />
+
+                <input 
+                    type='password' 
+                    value={password} 
+                    placeholder='password...' 
+                    onChange={onChangePassword} 
+                />
+
+                <input type='submit' />
             </form>
 
             {user && <h2>user logged in: {user.email}</h2>}
