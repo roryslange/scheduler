@@ -39,9 +39,6 @@ const Login = () => {
         
     }
 
-
-
-
     return (
         <div className={styles.content}>
             <h2>Sign In</h2>
