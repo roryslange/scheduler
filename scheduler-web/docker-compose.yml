@@ -9,7 +9,8 @@ services:
       - .:/app
       - /app/node_modules
     ports:
-      - "5173:5173"
+      - "5173:5173" #vite port for app
+      - "24678:24678" # hmr port
     environment:
       - NODE_ENV=development
     stdin_open: true 
