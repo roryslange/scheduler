@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
-import { auth } from '../../../firebase-config';
+import { useState } from 'react';
 import styles from './Login.module.scss';
-import { doSignInWithEmailAndPassword } from '../../firebase/auth';
-import { useAuth } from '../../contexts/authContext';
+import { useAuth } from '../../contexts/AuthContext/AuthContext';
 
 
 const Login = () => {
@@ -10,7 +8,8 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isValidEmail, setIsValidEmail] = useState(false);
-    const { userLoggedIn } = useAuth();
+    const { signIn } = useAuth();
+    const { signOut } = useAuth();
     const { currentUser } = useAuth();
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -26,13 +25,14 @@ const Login = () => {
 
     const handleSubmit = async (e:any) => {
         e.preventDefault();
-
         if (isValidEmail) {
-            await doSignInWithEmailAndPassword(auth, email, password);
-        }
-
-        console.log(currentUser);
-        
+            try {
+                await signIn(email, password);
+            } catch (error: any) {
+                setError(error.message);
+                console.error("error signing in: ", error);
+            }
+        }    
     }
 
 
@@ -58,7 +58,9 @@ const Login = () => {
                 <input type='submit' />
             </form>
 
-            {userLoggedIn && <h2>user logged in: {currentUser.email}</h2>}
+            {currentUser && <h2>user logged in: {currentUser.email}</h2>}
+
+            <button onClick={signOut}>sign out</button>
         </div>
     );
 }
