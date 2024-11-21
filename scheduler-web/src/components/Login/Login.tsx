@@ -1,9 +1,8 @@
-import react, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { auth } from '../../../firebase-config';
-import { signInWithEmailAndPassword, setPersistence, browserSessionPersistence} from 'firebase/auth';
 import styles from './Login.module.scss';
-
+import { doSignInWithEmailAndPassword } from '../../firebase/auth';
+import { useAuth } from '../../contexts/authContext';
 
 
 const Login = () => {
@@ -11,7 +10,8 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isValidEmail, setIsValidEmail] = useState(false);
-    const navigate = useNavigate();
+    const { userLoggedIn } = useAuth();
+    const { currentUser } = useAuth();
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -28,17 +28,13 @@ const Login = () => {
         e.preventDefault();
 
         if (isValidEmail) {
-            try {
-                await signInWithEmailAndPassword(auth, email, password);
-                await setPersistence(auth, browserSessionPersistence);
-                navigate('/register');
-            }
-            catch (err:any) {
-                setError(err.message);
-            }
+            await doSignInWithEmailAndPassword(auth, email, password);
         }
+
+        console.log(currentUser);
         
     }
+
 
     return (
         <div className={styles.content}>
@@ -62,7 +58,7 @@ const Login = () => {
                 <input type='submit' />
             </form>
 
-            {auth.currentUser && <h2>user logged in: {auth.currentUser.email}</h2>}
+            {userLoggedIn && <h2>user logged in: {currentUser.email}</h2>}
         </div>
     );
 }
