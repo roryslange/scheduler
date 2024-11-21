@@ -1,6 +1,7 @@
 import react, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../firebase-config';
-import { signInWithEmailAndPassword, User } from 'firebase/auth';
+import { signInWithEmailAndPassword, setPersistence, browserSessionPersistence} from 'firebase/auth';
 import styles from './Login.module.scss';
 
 
@@ -9,8 +10,8 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [user, setUser] = useState<User>();
     const [isValidEmail, setIsValidEmail] = useState(false);
+    const navigate = useNavigate();
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -28,9 +29,9 @@ const Login = () => {
 
         if (isValidEmail) {
             try {
-                const user = await signInWithEmailAndPassword(auth, email, password);
-                console.log(user);
-                setUser(user.user);
+                await signInWithEmailAndPassword(auth, email, password);
+                await setPersistence(auth, browserSessionPersistence);
+                navigate('/register');
             }
             catch (err:any) {
                 setError(err.message);
@@ -61,7 +62,7 @@ const Login = () => {
                 <input type='submit' />
             </form>
 
-            {user && <h2>user logged in: {user.email}</h2>}
+            {auth.currentUser && <h2>user logged in: {auth.currentUser.email}</h2>}
         </div>
     );
 }
