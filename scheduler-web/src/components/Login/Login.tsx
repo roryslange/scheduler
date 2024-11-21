@@ -50,14 +50,14 @@ const Login = () => {
                     placeholder='email...' 
                     onChange={onChangeEmail} 
                     style={{ borderColor: isValidEmail ? "black" : "red" }}
-                />
+                    required />
 
                 <input 
                     type='password' 
                     value={password} 
                     placeholder='password...' 
                     onChange={onChangePassword} 
-                />
+                    required />
 
                 <input type='submit' />
             </form>

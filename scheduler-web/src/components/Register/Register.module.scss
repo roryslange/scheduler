@@ -1,0 +1,15 @@
+@use '../../styles/App.scss';
+
+.content {
+    display: flex;
+    flex-direction: column;
+    background-color: gray;
+    padding: 0 1.5em 1.5em 1.5em;
+    border-radius: 8px;
+
+    form {
+        display: inherit;
+        flex-direction: column;
+        gap: 0.5em;
+    }
+}
