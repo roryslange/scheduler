@@ -1,5 +1,5 @@
 import styles from './Register.module.scss';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext/AuthContext';
 
 const Register = () => {
@@ -9,9 +9,6 @@ const Register = () => {
     const [isValidEmail, setIsValidEmail] = useState(true);
     const [isValidPassword, setIsValidPassword] = useState(true);
     const [err, setErr] = useState('');
-    const emailRef = useRef<HTMLInputElement | null>(null);
-    const passwordRef = useRef<HTMLInputElement | null>(null);
-    const passwordConfirmRef = useRef<HTMLInputElement | null>(null);
     const { signUp } = useAuth();
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -57,7 +54,6 @@ const Register = () => {
                     borderColor: isValidEmail ? "black" : "red"
                 }}
                 onChange={onChangeEmail}
-                ref={emailRef}
                 required />
 
                 <input 
@@ -67,7 +63,6 @@ const Register = () => {
                 style={{
                     borderColor: isValidPassword ? "black" : "red"
                 }}
-                ref={passwordRef}
                 required />
 
                 <input 
@@ -77,7 +72,6 @@ const Register = () => {
                 style={{
                     borderColor: isValidPassword ? "black" : "red"
                 }}
-                ref={passwordConfirmRef}
                 required />
 
                 <input type="submit" />
