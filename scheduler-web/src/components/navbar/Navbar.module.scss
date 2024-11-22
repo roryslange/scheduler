@@ -1,0 +1,20 @@
+@use '../../styles/App.scss';
+
+.container {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 95vw;
+    margin: 0 0 15px 0;
+    height: 65px;
+    z-index: 50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.links {
+    display: flex;
+    gap: 4px;
+    list-style: none;
+}

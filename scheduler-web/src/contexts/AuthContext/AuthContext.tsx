@@ -4,6 +4,7 @@ import { auth } from "../../../firebase-config";
 
 type AuthContextType = {
     currentUser: User | null;
+    isLoggedIn: boolean;
     signUp: (email: string, password: string) => Promise<UserCredential>;
     signIn: (email: string, password: string) => Promise<UserCredential>;
     signOut: () => Promise<void>;
@@ -24,6 +25,7 @@ export function useAuth() {
 export function AuthProvider({ children }: any) {
     const [currentUser, setCurrentUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
     function signUp(email: string, password: string) {
@@ -41,6 +43,7 @@ export function AuthProvider({ children }: any) {
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user);
+            setIsLoggedIn(!!user); //convert user to boolean
             setIsLoading(false);
         });
 
@@ -49,6 +52,7 @@ export function AuthProvider({ children }: any) {
 
     const value = {
         currentUser,
+        isLoggedIn,
         signUp,
         signIn,
         signOut

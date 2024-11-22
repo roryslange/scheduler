@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import styles from './Login.module.scss';
 import { useAuth } from '../../contexts/AuthContext/AuthContext';
+import styles from './Login.module.scss';
 
 
 const Login = () => {
@@ -9,8 +9,6 @@ const Login = () => {
     const [error, setError] = useState('');
     const [isValidEmail, setIsValidEmail] = useState(false);
     const { signIn } = useAuth();
-    const { signOut } = useAuth();
-    const { currentUser } = useAuth();
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -57,10 +55,6 @@ const Login = () => {
 
                 <input type='submit' />
             </form>
-
-            {currentUser && <h2>user logged in: {currentUser.email}</h2>}
-
-            <button onClick={signOut}>sign out</button>
         </div>
     );
 }
