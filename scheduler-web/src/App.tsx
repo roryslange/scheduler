@@ -3,7 +3,6 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Home from './pages/Home/Home';
 import Navbar from './components/navbar/Navbar';
-import SignOut from './components/SignOut/SignOut';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext/AuthContext';
 
@@ -16,7 +15,6 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/' element={<Home />} />
-          <Route path='/signout' element={<SignOut />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
