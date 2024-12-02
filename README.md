@@ -5,5 +5,6 @@ scheduler is a full stack web app that provides services similar to Jira. It's m
 - React + Vite
 - PostgreSQL
 - Spring Boot (web, JPA for database config, management, and repository functions)
+- Firebase (authentication, firestore)
 
 Feel free to explore this application, it is by no means finished, but it may be interesting to see my progress learning Sprint Boot! :)
