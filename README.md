@@ -27,7 +27,7 @@ scheduler is a full stack web app that provides services similar to Jira. It's m
    All of these environment variables are unique to your firebase project and should be kept private, ensure that firebase auth is activated and authentication methods activated are sign in with email and password and sign in with google account. 
 9. Run `npm install`
 10. Run `npm run dev`
-11. A link should appear in your terminal that leads you to `http://localhost:5432/`, if it does not, navigate to that url and ensure the application is running properly
+11. A link should appear in your terminal that leads you to `http://localhost:5173/`, if it does not, navigate to that url and ensure the application is running properly
 
 
 Feel free to explore this application, it is by no means finished, but it may be interesting to see my progress learning Sprint Boot! :)
