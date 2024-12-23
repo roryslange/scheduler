@@ -23,6 +23,10 @@ public class User {
     private LocalDate userCreated;
     private LocalDate lastSignedIn;
 
+    //no arg constructor
+    public User(){
+    }
+
     public User(long id, String uuid, String email, String name, LocalDate userCreated, LocalDate lastSignedIn) {
         this.id = id;
         this.uuid = uuid;

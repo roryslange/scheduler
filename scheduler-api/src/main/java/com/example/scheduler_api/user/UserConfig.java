@@ -2,10 +2,11 @@ package com.example.scheduler_api.user;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
-import java.util.List;
 
+@Configuration
 public class UserConfig {
 
     @Bean
@@ -21,9 +22,7 @@ public class UserConfig {
                     LocalDate.now()
             );
 
-            repository.saveAll(
-                    List.of(rory)
-            );
+            repository.save(rory);
         };
     }
 }
