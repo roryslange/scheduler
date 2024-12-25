@@ -1,5 +1,7 @@
 package com.example.scheduler_api.user;
 
+import jakarta.persistence.EntityNotFoundException;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +40,10 @@ public class UserService {
                 .orElseGet(() -> {
                     return userRepository.save(newUser);
                 });
+    }
+
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
     }
 
 }
