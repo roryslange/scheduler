@@ -1,9 +1,7 @@
 package com.example.scheduler_api.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,6 +18,16 @@ public class UserController {
     @GetMapping()
     public List<User> getUsers() {
         return userService.getAllUsers();
+    }
+
+    @PostMapping()
+    public User addUser(@RequestBody User newUser) {
+        return userService.addUser(newUser);
+    }
+
+    @PutMapping("/{id}")
+    public User updateUser(@RequestBody User newUser, @PathVariable Long id) {
+        return userService.updateUser(newUser, id);
     }
 
 }

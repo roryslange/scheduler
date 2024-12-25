@@ -3,6 +3,7 @@ package com.example.scheduler_api.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -18,4 +19,25 @@ public class UserService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+
+    public User addUser(User newUser) {
+        newUser.setUserCreated(LocalDate.now());
+        newUser.setLastSignedIn(LocalDate.now());
+        return userRepository.save(newUser);
+    }
+
+    public User updateUser(User newUser, Long id) {
+        return userRepository.findById(id)
+                .map(user -> {
+                    user.setName(newUser.getName());
+                    user.setUuid(newUser.getUuid());
+                    user.setEmail(newUser.getEmail());
+                    user.setUserCreated(LocalDate.now());
+                    return userRepository.save(user);
+                })
+                .orElseGet(() -> {
+                    return userRepository.save(newUser);
+                });
+    }
+
 }
