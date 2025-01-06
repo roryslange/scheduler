@@ -24,8 +24,8 @@ public class User {
     private LocalDate userCreated;
     private LocalDate lastSignedIn;
 
-    //no arg constructor
-    public User(){
+    //no arg constructor protected since its never used
+    protected User(){
     }
 
     public User(long id, String uuid, String email, String name, LocalDate userCreated, LocalDate lastSignedIn) {
